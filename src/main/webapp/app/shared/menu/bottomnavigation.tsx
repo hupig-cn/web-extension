@@ -1,6 +1,6 @@
 import React from 'react';
 import { BottomNavigation, BottomNavigationAction, createStyles, makeStyles, Theme } from '@material-ui/core';
-import { WorkRounded, MessageRounded, DomainRounded } from '@material-ui/icons';
+import { AssignmentRounded, MessageRounded, LocalAtmRounded } from '@material-ui/icons';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import initStore from 'app/config/store';
@@ -87,7 +87,7 @@ export default function LabelBottomNavigation() {
   }
   return (
     <BottomNavigation id="nav-bottoms" className={classes.root} showLabels value={value} onChange={handleChange}>
-      <BottomNavigationAction label="收益看板" value="profit" icon={<WorkRounded />} />
+      <BottomNavigationAction label="收益看板" value="profit" icon={<AssignmentRounded />} />
       <BottomNavigationAction
         label="消息"
         value="information"
@@ -97,7 +97,7 @@ export default function LabelBottomNavigation() {
           </Badge>
         }
       />
-      <BottomNavigationAction label="资金管理" value="capital" icon={<DomainRounded />} />
+      <BottomNavigationAction label="资金管理" value="capital" icon={<LocalAtmRounded />} />
     </BottomNavigation>
   );
 }

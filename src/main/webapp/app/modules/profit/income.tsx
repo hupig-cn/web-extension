@@ -149,9 +149,8 @@ export default function LongMenu() {
         value={value}
         onChange={handleChange}
       >
-        <BottomNavigationAction label="付款收益/日" value="scan" icon={<span style={{ fontSize: '1.5rem' }}>583.91</span>} />
-        <BottomNavigationAction label="收款收益/日" value="pay" icon={<span style={{ fontSize: '1.5rem' }}>1253.82</span>} />
-        <BottomNavigationAction label="推荐激增/日" value="pay" icon={<span style={{ fontSize: '1.5rem' }}>81</span>} />
+        <BottomNavigationAction label="今日推荐" value="pay" icon={<span style={{ fontSize: '1.5rem' }}>81</span>} />
+        <BottomNavigationAction label="今日收益" value="pay" icon={<span style={{ fontSize: '1.5rem' }}>1253.82</span>} />
       </BottomNavigation>
       <div style={{ height: '117px' }} />
       <img

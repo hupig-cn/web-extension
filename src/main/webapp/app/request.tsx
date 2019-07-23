@@ -5,7 +5,7 @@ import axios from 'axios';
 // 是否开启网络请求时的页面同步等待效果
 const APP_AXIOS_REQUEST_WAIT_VIEW_SHOW = true;
 
-const APP_SERVER_API_URL = 'http://139.196.100.121/yjfapi/web-business'; // SERVER_API_URL
+const APP_SERVER_API_URL = 'http://139.196.100.121/yjfapi/web-extension'; // SERVER_API_URL
 
 // 各接口配置
 export const Api = {

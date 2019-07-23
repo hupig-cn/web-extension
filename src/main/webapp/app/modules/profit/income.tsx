@@ -1,3 +1,5 @@
+
+// 今日推荐/今日收益
 import React from 'react';
 // tslint:disable-next-line: no-submodule-imports
 import BottomNavigation from '@material-ui/core/BottomNavigation';
@@ -9,6 +11,7 @@ import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 // tslint:disable-next-line: no-submodule-imports
 import { ControlPointRounded } from '@material-ui/icons';
+import { getThemeProps } from '@material-ui/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -131,7 +134,7 @@ export const Loadpages = key => {
   }
 };
 
-export default function LongMenu() {
+export default function LongMenu(props) {
   const classes = useStyles();
   const [value] = React.useState('home');
 
@@ -154,8 +157,8 @@ export default function LongMenu() {
         value={value}
         onChange={handleChange}
       >
-        <BottomNavigationAction label="今日推荐" value="pay" icon={<span style={{ fontSize: '1.5rem' }}>81</span>} />
-        <BottomNavigationAction label="今日收益" value="pay" icon={<span style={{ fontSize: '1.5rem' }}>1253.82</span>} />
+        <BottomNavigationAction label="今日推荐" value="pay" icon={<span style={{ fontSize: '1.5rem' }}>{ props.promote ? props.promote : 0 }</span>} />
+        <BottomNavigationAction label="今日收益" value="pay" icon={<span style={{ fontSize: '1.5rem' }}>{ props.income ? props.income : 0 }</span>} />
       </BottomNavigation>
       <div style={{ height: '117px' }} />
       <img

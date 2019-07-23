@@ -1,11 +1,13 @@
 import './extension.scss';
 
 import React from 'react';
+
 import { connect } from 'react-redux';
 
 import { getSession } from 'app/shared/reducers/authentication';
 
 import Profit from '../profit/profit';
+
 import Enddiv from '../../shared/menu/enddiv';
 
 export interface IHomeProp extends StateProps, DispatchProps {}
@@ -14,7 +16,6 @@ export class Home extends React.Component<IHomeProp> {
   componentDidMount() {
     this.props.getSession();
   }
-
   render() {
     return (
       <div className="jh-body">

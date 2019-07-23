@@ -13,17 +13,37 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: '#ffffff',
       height: '100%',
       borderTop: '1px solid #f0f0f0',
+
       '& button': {
         minWidth: '0px',
         outline: 'none',
         color: 'rgba(0, 0, 0, 0.64)',
         height: '100%',
+
         '& img': {
           marginBottom: 5,
           width: 28,
           height: 28
         }
+      },
+      '&[ws-container-id="responsive"]': {
+        display: 'inline-block',
+
+        '& > button': {
+          width: '50%',
+          display: 'block',
+          float: 'left',
+          maxWidth: '50%',
+          '&:nth-child(1),&:nth-child(2)': {
+            borderBottom: '1px solid #eaedf1',
+            marginTop: '5px'
+          },
+          '&:nth-child(even)': {
+            borderLeft: '1px solid #eaedf1'
+          }
+        }
       }
+
     },
     divTitleName: {
       '& span': {
@@ -53,7 +73,7 @@ export const Loadpages = key => {
   }
 };
 
-export default function LongMenu() {
+export default function LongMenu(props) {
   const classes = useStyles();
   const [value] = React.useState('home');
 
@@ -74,11 +94,11 @@ export default function LongMenu() {
         <span style={{ float: 'left' }}>收益管理</span>
         <span style={{ float: 'right', fontSize: '0.65rem', color: '#00000075' }}>详情 ></span>
       </div>
-      <BottomNavigation showLabels className={classes.root} value={value} onChange={handleChange}>
-        <BottomNavigationAction label="冻结中" value="key1" icon={<span style={{ fontSize: '1.4rem' }}>300.00</span>} />
-        <BottomNavigationAction label="可提现" value="key2" icon={<span style={{ fontSize: '1.4rem' }}>732.81</span>} />
-        <BottomNavigationAction label="提现中" value="key3" icon={<span style={{ fontSize: '1.4rem' }}>650.30</span>} />
-        <BottomNavigationAction label="持有总额" value="key4" icon={<span style={{ fontSize: '1.4rem' }}>5821.00</span>} />
+      <BottomNavigation ws-container-id="responsive" showLabels className={classes.root} value={value} onChange={handleChange}>
+        <BottomNavigationAction label="冻结中" value="key1" icon={<span style={{ width: '50vw', fontSize: '1.4rem' }}>{props.revenue.freeze}</span>} />
+        <BottomNavigationAction label="可提现" value="key2" icon={<span style={{ width: '50vw', fontSize: '1.4rem' }}>{props.revenue.carry}</span>} />
+        <BottomNavigationAction label="提现中" value="key3" icon={<span style={{ width: '50vw', fontSize: '1.4rem' }}>{props.revenue.withdrawal}</span>} />
+        <BottomNavigationAction label="持有总额" value="key4" icon={<span style={{ width: '50vw', fontSize: '1.4rem' }}>{props.revenue.amount}</span>} />
       </BottomNavigation>
     </div>
   );

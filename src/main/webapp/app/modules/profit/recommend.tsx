@@ -54,14 +54,21 @@ export const Loadpages = key => {
   }
 };
 
-export default function LongMenu() {
+export default function LongMenu(props) {
   const classes = useStyles();
   const [value] = React.useState('home');
 
   function handleChange(event: React.ChangeEvent<{}>, newValue: string) {
     Loadpages(newValue);
   }
-
+  function formatNumberViewText(num: any) {
+    num = parseInt(num.replace(/\ |,/g , ''), 10);
+    const d = parseInt((num / 1000) , 10);
+    if (d >= 1) {
+      return (d + 'k' + ((num % 1000) ? '+' : ''));
+    }
+    return num;
+  }
   return (
     <div
       style={{
@@ -76,9 +83,15 @@ export default function LongMenu() {
         <span style={{ float: 'right', fontSize: '0.65rem', color: '#00000075' }}>全部 ></span>
       </div>
       <BottomNavigation showLabels className={classes.root} value={value} onChange={handleChange}>
-        <BottomNavigationAction label="推荐中" value="key1" icon={<span style={{ fontSize: '1.4rem' }}>18</span>} />
-        <BottomNavigationAction label="已推荐" value="key2" icon={<span style={{ fontSize: '1.4rem' }}>871</span>} />
-        <BottomNavigationAction label="月流失" value="key3" icon={<span style={{ fontSize: '1.4rem' }}>2</span>} />
+        <BottomNavigationAction label="推荐中" value="key1" icon={<span style={{ fontSize: '1.4rem' }}>
+          { props.recommend.rc_ing ? formatNumberViewText(props.recommend.rc_ing) : 0 }
+        </span>} />
+        <BottomNavigationAction label="已推荐" value="key2" icon={<span style={{ fontSize: '1.4rem' }}>
+          { props.recommend.rc_ed ? formatNumberViewText(props.recommend.rc_ed) : 0 }
+        </span>} />
+        <BottomNavigationAction label="月流失" value="key3" icon={<span style={{ fontSize: '1.4rem' }}>
+          { props.recommend.loss ? formatNumberViewText(props.recommend.loss) : 0 }
+        </span>} />
         <BottomNavigationAction
           style={{ color: '#fe4365', background: '#f0f0f0' }}
           label="推荐用户"

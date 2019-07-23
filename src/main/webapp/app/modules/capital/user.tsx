@@ -87,7 +87,7 @@ export const Loadpages = key => {
   }
 };
 
-export default function LongMenu() {
+export default function LongMenu(props) {
   const classes = useStyles();
   const [value] = React.useState('home');
 
@@ -98,15 +98,15 @@ export default function LongMenu() {
   return (
     <div>
       <div style={{ backgroundColor: '#fe4365', height: '60px', position: 'fixed', top: '0px', width: '100%', zIndex: 1000 }}>
-        <Avatar alt="photo" src="./content/images/user.png" className={classes.bigAvatar} />
+        <Avatar alt="photo" src={ props.user ? props.user.avator : './content/images/user.png' } className={classes.bigAvatar} />
         <div className={classes.namePlusSetting}>
           <div className={classes.nameOne}>
-            <span className={classes.name}>用户昵称</span>
+            <span className={classes.name}>{ props.user ? props.user.nick_name : '-' }</span>
             <IconButton color="primary" aria-label="setting" style={{ padding: '0px', float: 'right', outline: 'none' }}>
               <SettingsRounded />
             </IconButton>
           </div>
-          <div className={classes.login}>13800138000</div>
+          <div className={classes.login}>{ props.user ? props.user.account : 0 }</div>
         </div>
       </div>
       <BottomNavigation
@@ -122,9 +122,9 @@ export default function LongMenu() {
         onChange={handleChange}
       >
         <BottomNavigationAction
-          label="昨日收入：237.00"
+          label={ props.user ? '日收入：' + props.user.yestoday_income : '日收入：' + 0 }
           value="scan"
-          icon={<span style={{ fontSize: '1.4rem', marginBottom: '5px' }}>余额：18888.88</span>}
+          icon={<span style={{ fontSize: '1.4rem', marginBottom: '5px' }}>余额：{ props.user ? props.user.balance : 0 }</span>}
         />
       </BottomNavigation>
       <div style={{ height: '147px' }} />

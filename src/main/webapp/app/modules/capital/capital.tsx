@@ -7,19 +7,41 @@ import User from './user';
 import Bankcard from './bankcard';
 import Profit from './profit';
 import Entrys from './entrys';
+// 专用接口请求模块
+import RequestLoadingWait, { Axios, Api } from 'app/request';
 
 export interface IPersonalProp extends StateProps, DispatchProps {}
 
 export class Personal extends React.Component<IPersonalProp> {
+  constructor(props) {
+    super(props);
+
+    // 初始化接口数据结构
+    this.state = Api.tsxCapital;
+  }
+
   componentDidMount() {
     this.props.getSession();
+
+    // 动态获取最新数据
+    Axios.post(this.state.api, { username: 'sumwang', age: 18 }).then(response => {
+      this.setState({ loading: false, 'data': response.data.data });
+    }).catch(error => {
+      // TODO toast error
+      window.console.log(error);
+    });
   }
 
   render() {
+    const repos = this.state.data;
     return (
       <div className="jh-personal">
-        <User />
-        <Bankcard />
+
+        {/* 同步请求 等待视图 */}
+        <RequestLoadingWait loading={ this.state.loading } />
+
+        <User user={repos.user} />
+        <Bankcard bankcard={repos.bankcard} />
         <img
           style={{
             width: '100%',
@@ -30,8 +52,8 @@ export class Personal extends React.Component<IPersonalProp> {
           }}
           src="./content/images/profit.png"
         />
-        <Profit />
-        <Entrys />
+        <Profit profit={repos.profit} />
+        <Entrys entrys={repos.entrys} />
       </div>
     );
   }

@@ -1,46 +1,8 @@
 import React from 'react';
-import { BottomNavigation, BottomNavigationAction, createStyles, makeStyles, Theme } from '@material-ui/core';
-import { AssignmentRounded, MessageRounded, LocalAtmRounded } from '@material-ui/icons';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import initStore from 'app/config/store';
-import { registerLocale } from 'app/config/translation';
-import Enddiv from './enddiv';
-// tslint:disable-next-line: no-submodule-imports
-import Badge from '@material-ui/core/Badge';
-import Profit from 'app/modules/profit/profit';
-import Information from 'app/modules/information/information';
-import Capital from 'app/modules/capital/capital';
+import { BottomNavigation, BottomNavigationAction, createStyles, makeStyles, Theme, Badge } from '@material-ui/core';
+import { AssignmentRounded, LocalAtmRounded } from '@material-ui/icons';
+import { Link } from 'react-router-dom';
 
-export const bodyEl = document.getElementById('root').getElementsByClassName('jh-body');
-
-const store = initStore();
-registerLocale(store);
-
-export const Loadpages = key => {
-  let temp: any = null;
-  switch (key) {
-    case 'profit':
-      temp = <Profit />;
-      break;
-    case 'information':
-      temp = <Information />;
-      break;
-    case 'capital':
-      temp = <Capital />;
-      break;
-    default:
-      temp = null;
-      break;
-  }
-  ReactDOM.render(
-    <Provider store={store}>
-      {temp}
-      <Enddiv />
-    </Provider>,
-    bodyEl.item(0)
-  );
-};
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -50,55 +12,66 @@ const useStyles = makeStyles((theme: Theme) =>
       bottom: '0px',
       borderTop: '1px solid #f0f0f0',
       height: '47px',
+      lineHeight: '18px',
       '& button': {
         minWidth: '50px',
         paddingBottom: '0px',
         paddingTop: '0px',
-        height: '46px'
+        height: '46px',
+        '& span': {
+          minFontSize: '0.1rem',
+          fontSize: '0.65rem',
+          '& svg': {
+            paddingTop: '2px'
+          }
+        }
       },
       '& button.Mui-selected': {
         color: '#fe4365',
         fontSize: '0.65rem',
         paddingTop: '0px',
-        outline: 'none'
-      },
-      '& svg': {
-        paddingTop: '2px'
-      },
-      '& span': {
-        minFontSize: '0.1rem',
-        fontSize: '0.65rem'
-      },
-      '& span.Mui-selected': {
-        minFontSize: '0.1rem',
-        fontSize: '0.65rem',
-        paddingTop: '0px'
+        outline: 'none',
+        '& span.Mui-selected': {
+          minFontSize: '0.1rem',
+          fontSize: '0.65rem',
+          paddingTop: '0px'
+        }
       }
-    },
-    margin: {}
+    }
   })
 );
 
 export default function LabelBottomNavigation() {
-  const [value, setValue] = React.useState('profit');
   const classes = useStyles();
+  const [value, setValue] = React.useState('extension');
+
   function handleChange(event: React.ChangeEvent<{}>, newValue: string) {
-    Loadpages(newValue);
     setValue(newValue);
+    document.getElementById('app-shared-menu-bottom-navigation-link-' + newValue).click();
   }
+
   return (
-    <BottomNavigation id="nav-bottoms" className={classes.root} showLabels value={value} onChange={handleChange}>
-      <BottomNavigationAction label="收益看板" value="profit" icon={<AssignmentRounded />} />
+    <BottomNavigation showLabels value={value} onChange={handleChange} className={classes.root}>
       <BottomNavigationAction
-        label="消息"
-        value="information"
+        label="收益看板"
+        value="extension"
         icon={
-          <Badge className={classes.margin} color="secondary" variant="dot">
-            <MessageRounded />
+          <Badge color="default" variant="dot">
+            <AssignmentRounded />
           </Badge>
         }
       />
-      <BottomNavigationAction label="资金管理" value="capital" icon={<LocalAtmRounded />} />
+      <Link id="app-shared-menu-bottom-navigation-link-extension" to="/" />
+      <BottomNavigationAction
+        label="资金管理"
+        value="personal"
+        icon={
+          <Badge color="default" variant="dot">
+            <LocalAtmRounded />
+          </Badge>
+        }
+      />
+      <Link id="app-shared-menu-bottom-navigation-link-personal" to="/personal" />
     </BottomNavigation>
   );
 }

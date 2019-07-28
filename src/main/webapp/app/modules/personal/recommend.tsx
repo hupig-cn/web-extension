@@ -13,6 +13,7 @@ import {
   EventNoteRounded,
   ControlPointRounded
 } from '@material-ui/icons';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -46,15 +47,8 @@ const useStyles = makeStyles((theme: Theme) =>
 export const Loadpages = key => {
   let temp: any = null;
   switch (key) {
-    case 'key1':
-      break;
-    case 'key2':
-      break;
-    case 'key3':
-      break;
-    case 'key4':
-      break;
-    case 'key5':
+    case 'recommend':
+      document.getElementById('app-modules-consumer-quickaccess-button-link-sharepage').click();
       break;
     default:
       temp = null;
@@ -73,25 +67,26 @@ export default function LongMenu() {
   return (
     <div
       style={{
-        marginTop: '5px',
+        marginTop: '15px',
         paddingTop: '6px',
         backgroundColor: 'white',
         borderBottom: '1px solid #f0f0f0'
       }}
     >
       <div className={classes.divTitleName}>
-        <span style={{ float: 'left' }}>我的银行卡</span>
-        <span style={{ float: 'right', fontSize: '0.65rem', color: '#00000075' }}>全部 ></span>
+        <span style={{ float: 'left' }}>我的推荐</span>
+        <span style={{ float: 'right', fontSize: '0.65rem', color: '#00000075' }}>○</span>
       </div>
       <BottomNavigation showLabels className={classes.root} value={value} onChange={handleChange}>
-        <BottomNavigationAction label="已绑定/张" value="key1" icon={<span style={{ fontSize: '1.4rem' }}>3</span>} />
+        <BottomNavigationAction label="已推荐/人" value="key1" icon={<span style={{ fontSize: '1.4rem' }}>3</span>} />
         <BottomNavigationAction
           style={{ color: '#fe4365', background: '#f0f0f0' }}
-          label="添加新的卡片"
-          value="key4"
+          label="推荐好友"
+          value="recommend"
           icon={<ControlPointRounded style={{ height: '33px', fill: '#fe4365' }} />}
         />
       </BottomNavigation>
+      <Link id="app-modules-consumer-quickaccess-button-link-sharepage" to="/sharepage" />
     </div>
   );
 }

@@ -18,7 +18,6 @@ const useStyles = makeStyles((theme: Theme) =>
         outline: 'none',
         color: 'rgba(0, 0, 0, 0.64)',
         height: '100%',
-        maxWidth: '100%',
         '& img': {
           marginBottom: 5,
           width: 28,
@@ -72,13 +71,16 @@ export default function LongMenu() {
       }}
     >
       <div className={classes.divTitleName}>
-        <span style={{ float: 'left' }}>收益信息</span>
-        <span style={{ float: 'right', fontSize: '0.65rem', color: '#00000075' }}>全部 ></span>
+        <span style={{ float: 'left' }}>收益管理</span>
+        <span style={{ float: 'right', fontSize: '0.65rem', color: '#00000075' }}>○</span>
       </div>
       <BottomNavigation showLabels className={classes.root} value={value} onChange={handleChange}>
-        <BottomNavigationAction label="当月收益" value="key1" icon={<span style={{ fontSize: '1.4rem' }}>2710.00</span>} />
-        <BottomNavigationAction label="上月收益" value="key4" icon={<span style={{ fontSize: '1.4rem' }}>5823.00</span>} />
+        <BottomNavigationAction label="冻结中" value="key1" icon={<span style={{ fontSize: '1.4rem' }}>300.00</span>} />
+        <BottomNavigationAction label="可提现" value="key2" icon={<span style={{ fontSize: '1.4rem' }}>732.81</span>} />
+        <BottomNavigationAction label="提现中" value="key3" icon={<span style={{ fontSize: '1.4rem' }}>650.30</span>} />
+        <BottomNavigationAction label="持有总额" value="key4" icon={<span style={{ fontSize: '1.4rem' }}>5821.00</span>} />
       </BottomNavigation>
+      <div style={{ height: '10px', width: '100%', backgroundColor: '#f0f0f0' }} />
     </div>
   );
 }

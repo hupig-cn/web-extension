@@ -14,7 +14,6 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       width: '100%',
-      maxWidth: '360px',
       paddingTop: '0px',
       backgroundColor: theme.palette.background.paper,
       '& span': {

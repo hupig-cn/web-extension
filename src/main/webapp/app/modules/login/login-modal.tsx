@@ -19,11 +19,15 @@ class LoginModal extends React.Component<ILoginModalProps> {
 
   render() {
     const { loginError, handleClose } = this.props;
-
     return (
+      // @ts-ignore
       <Modal isOpen={this.props.showModal} toggle={handleClose} backdrop="static" id="login-page" autoFocus={false}>
         <AvForm onSubmit={this.handleSubmit}>
-          <ModalHeader id="login-title" toggle={handleClose}>
+          <ModalHeader
+            id="login-title"
+            // @ts-ignore
+            toggle={handleClose}
+          >
             <Translate contentKey="login.title">Sign in</Translate>
           </ModalHeader>
           <ModalBody>
@@ -38,22 +42,8 @@ class LoginModal extends React.Component<ILoginModalProps> {
                 ) : null}
               </Col>
               <Col md="12">
-                <AvField
-                  name="username"
-                  label={translate('global.form.username.label')}
-                  placeholder={translate('global.form.username.placeholder')}
-                  required
-                  errorMessage="Username cannot be empty!"
-                  autoFocus
-                />
-                <AvField
-                  name="password"
-                  type="password"
-                  label={translate('login.form.password')}
-                  placeholder={translate('login.form.password.placeholder')}
-                  required
-                  errorMessage="Password cannot be empty!"
-                />
+                <AvField name="username" label={'手机号'} placeholder={'请输入手机号'} errorMessage="手机号不能为空!" autoFocus />
+                <AvField name="password" type="password" label={'密码'} placeholder={'请输入密码'} required errorMessage="密码不能为空!" />
                 <AvGroup check inline>
                   <Label className="form-check-label">
                     <AvInput type="checkbox" name="rememberMe" /> <Translate contentKey="login.form.rememberme">Remember me</Translate>
@@ -61,14 +51,19 @@ class LoginModal extends React.Component<ILoginModalProps> {
                 </AvGroup>
               </Col>
             </Row>
-            <div className="mt-1">&nbsp;</div>
           </ModalBody>
           <ModalFooter>
-            <Button color="secondary" onClick={handleClose} tabIndex="1">
-              <Translate contentKey="entity.action.cancel">Cancel</Translate>
+            <Button
+              style={{ width: '50%' }}
+              // @ts-ignore
+              onClick={handleClose}
+              // @ts-ignore
+              tabIndex="1"
+            >
+              取消
             </Button>{' '}
-            <Button color="primary" type="submit">
-              <Translate contentKey="login.form.button">Sign in</Translate>
+            <Button style={{ backgroundColor: '#fe4365', border: '1px solid #fe4365', width: '50%' }} type="submit">
+              登录
             </Button>
           </ModalFooter>
         </AvForm>

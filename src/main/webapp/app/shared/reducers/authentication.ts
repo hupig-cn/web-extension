@@ -97,6 +97,13 @@ export default (state: AuthenticationState = initialState, action): Authenticati
 
 export const displayAuthError = message => ({ type: ACTION_TYPES.ERROR_MESSAGE, message });
 
+// tslint:disable-next-line: ter-arrow-body-style
+export const getSessionRE = () => async (dispatch, getState) => {
+  return {
+    payload: axios.get('services/login/api/account')
+  };
+};
+
 export const getSession = () => async (dispatch, getState) => {
   await dispatch({
     type: ACTION_TYPES.GET_SESSION,

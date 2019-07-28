@@ -6,6 +6,8 @@ import authentication, { AuthenticationState } from './authentication';
 import applicationProfile, { ApplicationProfileState } from './application-profile';
 
 import administration, { AdministrationState } from 'app/modules/administration/administration.reducer';
+import files, { FilesState } from 'app/requests/basic/files.reducer';
+import userassets, { UserassetsState } from 'app/requests/basic/userassets.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {
@@ -13,6 +15,8 @@ export interface IRootState {
   readonly locale: LocaleState;
   readonly applicationProfile: ApplicationProfileState;
   readonly administration: AdministrationState;
+  readonly files: FilesState;
+  readonly userassets: UserassetsState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
 }
@@ -22,6 +26,8 @@ const rootReducer = combineReducers<IRootState>({
   locale,
   applicationProfile,
   administration,
+  files,
+  userassets,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar
 });

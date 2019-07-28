@@ -9,18 +9,27 @@ import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      width: '100vw',
+      width: '100%',
       backgroundColor: '#ffffff',
       height: '100%',
+      borderTop: '1px solid #f0f0f0',
       '& button': {
+        minWidth: '0px',
         outline: 'none',
-        color: 'rgba(0, 0, 0, 0.75)',
+        color: 'rgba(0, 0, 0, 0.64)',
         height: '100%',
+        maxWidth: '100%',
         '& img': {
           marginBottom: 5,
           width: 28,
           height: 28
         }
+      }
+    },
+    divTitleName: {
+      '& span': {
+        margin: '0px 10px 5px 10px',
+        fontSize: '0.9rem'
       }
     }
   })
@@ -39,12 +48,6 @@ export const Loadpages = key => {
       break;
     case 'key5':
       break;
-    case 'key6':
-      break;
-    case 'key7':
-      break;
-    case 'key8':
-      break;
     default:
       temp = null;
       break;
@@ -62,23 +65,20 @@ export default function LongMenu() {
   return (
     <div
       style={{
-        paddingTop: '12px',
-        backgroundColor: 'white'
+        marginTop: '5px',
+        paddingTop: '6px',
+        backgroundColor: 'white',
+        borderBottom: '1px solid #f0f0f0'
       }}
     >
+      <div className={classes.divTitleName}>
+        <span style={{ float: 'left' }}>收益信息</span>
+        <span style={{ float: 'right', fontSize: '0.65rem', color: '#00000075' }}>○</span>
+      </div>
       <BottomNavigation showLabels className={classes.root} value={value} onChange={handleChange}>
-        <BottomNavigationAction label="新手入门" value="key1" icon={<img src="./content/images/icon1.png" />} />
-        <BottomNavigationAction label="我的用户" value="key2" icon={<img src="./content/images/icon2.png" />} />
-        <BottomNavigationAction label="我的商家" value="key3" icon={<img src="./content/images/icon3.png" />} />
-        <BottomNavigationAction label="推荐榜" value="key4" icon={<img src="./content/images/icon4.png" />} />
+        <BottomNavigationAction label="当月收益" value="key1" icon={<span style={{ fontSize: '1.4rem' }}>2710.00</span>} />
+        <BottomNavigationAction label="上月收益" value="key4" icon={<span style={{ fontSize: '1.4rem' }}>5823.00</span>} />
       </BottomNavigation>
-      <BottomNavigation showLabels className={classes.root} value={value} onChange={handleChange}>
-        <BottomNavigationAction label="收益详情" value="key5" icon={<img src="./content/images/icon5.png" />} />
-        <BottomNavigationAction label="升级收益" value="key6" icon={<img src="./content/images/icon6.png" />} />
-        <BottomNavigationAction label="申请提现" value="key7" icon={<img src="./content/images/icon7.png" />} />
-        <BottomNavigationAction label="提现记录" value="key8" icon={<img src="./content/images/icon8.png" />} />
-      </BottomNavigation>
-      <div style={{ borderBottom: '1px solid #f0f0f0' }} />
     </div>
   );
 }

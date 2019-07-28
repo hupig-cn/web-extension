@@ -39,7 +39,7 @@ export class Extension extends React.Component<IExtensionProp> {
     const { account, profitEntity } = this.props;
     return (
       <div>
-        {!(account && account.login) ? (
+        {account && account.login ? (
           <div>
             <Income profit={profitEntity} />
             <Rrofiticon />

@@ -98,7 +98,7 @@ export default (state: ProfitState = initialState, action): ProfitState => {
   }
 };
 
-const apiUrl = 'services/basic/api/receiptpay/getUserPrifitInfo';
+const apiUrl = 'services/basic/api/receiptpay/getUserProfit';
 
 // Actions
 
@@ -109,7 +109,3 @@ export const getProfitEntity: ICrudGetAction<IProfit> = userid => {
     payload: axios.get<IProfit>(requestUrl)
   };
 };
-
-export const reset = () => ({
-  type: ACTION_TYPES.RESET
-});

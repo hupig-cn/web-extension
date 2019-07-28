@@ -5,6 +5,15 @@ import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 // tslint:disable-next-line: no-submodule-imports
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
+import {
+  PaymentRounded,
+  MoveToInboxRounded,
+  ThumbsUpDownRounded,
+  RateReviewRounded,
+  EventNoteRounded,
+  ControlPointRounded
+} from '@material-ui/icons';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -13,37 +22,18 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: '#ffffff',
       height: '100%',
       borderTop: '1px solid #f0f0f0',
-
       '& button': {
         minWidth: '0px',
         outline: 'none',
         color: 'rgba(0, 0, 0, 0.64)',
         height: '100%',
-
+        maxWidth: '100%',
         '& img': {
           marginBottom: 5,
           width: 28,
           height: 28
         }
-      },
-      '&[ws-container-id="responsive"]': {
-        display: 'inline-block',
-
-        '& > button': {
-          width: '50%',
-          display: 'block',
-          float: 'left',
-          maxWidth: '50%',
-          '&:nth-child(1),&:nth-child(2)': {
-            borderBottom: '1px solid #eaedf1',
-            marginTop: '5px'
-          },
-          '&:nth-child(even)': {
-            borderLeft: '1px solid #eaedf1'
-          }
-        }
       }
-
     },
     divTitleName: {
       '& span': {
@@ -57,15 +47,8 @@ const useStyles = makeStyles((theme: Theme) =>
 export const Loadpages = key => {
   let temp: any = null;
   switch (key) {
-    case 'key1':
-      break;
-    case 'key2':
-      break;
-    case 'key3':
-      break;
-    case 'key4':
-      break;
-    case 'key5':
+    case 'recommend':
+      document.getElementById('app-modules-consumer-quickaccess-button-link-sharepage').click();
       break;
     default:
       temp = null;
@@ -73,7 +56,7 @@ export const Loadpages = key => {
   }
 };
 
-export default function LongMenu(props) {
+export default function LongMenu() {
   const classes = useStyles();
   const [value] = React.useState('home');
 
@@ -91,15 +74,19 @@ export default function LongMenu(props) {
       }}
     >
       <div className={classes.divTitleName}>
-        <span style={{ float: 'left' }}>收益管理</span>
-        <span style={{ float: 'right', fontSize: '0.65rem', color: '#00000075' }}>详情 ></span>
+        <span style={{ float: 'left' }}>我的推荐</span>
+        <span style={{ float: 'right', fontSize: '0.65rem', color: '#00000075' }}>○</span>
       </div>
-      <BottomNavigation ws-container-id="responsive" showLabels className={classes.root} value={value} onChange={handleChange}>
-        <BottomNavigationAction label="冻结中" value="key1" icon={<span style={{ width: '50vw', fontSize: '1.4rem' }}>{props.revenue.freeze}</span>} />
-        <BottomNavigationAction label="可提现" value="key2" icon={<span style={{ width: '50vw', fontSize: '1.4rem' }}>{props.revenue.carry}</span>} />
-        <BottomNavigationAction label="提现中" value="key3" icon={<span style={{ width: '50vw', fontSize: '1.4rem' }}>{props.revenue.withdrawal}</span>} />
-        <BottomNavigationAction label="持有总额" value="key4" icon={<span style={{ width: '50vw', fontSize: '1.4rem' }}>{props.revenue.amount}</span>} />
+      <BottomNavigation showLabels className={classes.root} value={value} onChange={handleChange}>
+        <BottomNavigationAction label="已推荐/人" value="key1" icon={<span style={{ fontSize: '1.4rem' }}>3</span>} />
+        <BottomNavigationAction
+          style={{ color: '#fe4365', background: '#f0f0f0' }}
+          label="推荐新用户"
+          value="recommend"
+          icon={<ControlPointRounded style={{ height: '33px', fill: '#fe4365' }} />}
+        />
       </BottomNavigation>
+      <Link id="app-modules-consumer-quickaccess-button-link-sharepage" to="/sharepage" />
     </div>
   );
 }

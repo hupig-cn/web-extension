@@ -62,7 +62,7 @@ export default function LongMenu() {
   return (
     <div
       style={{
-        paddingTop: '12px',
+        paddingTop: '0px',
         backgroundColor: 'white'
       }}
     >
@@ -78,7 +78,7 @@ export default function LongMenu() {
         <BottomNavigationAction label="申请提现" value="key7" icon={<img src="./content/images/icon7.png" />} />
         <BottomNavigationAction label="提现记录" value="key8" icon={<img src="./content/images/icon8.png" />} />
       </BottomNavigation>
-      <div style={{ borderBottom: '1px solid #f0f0f0' }} />
+      <div style={{ height: '10px', width: '100%', backgroundColor: '#f0f0f0' }} />
     </div>
   );
 }

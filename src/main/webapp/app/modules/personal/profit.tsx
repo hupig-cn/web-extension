@@ -5,14 +5,6 @@ import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 // tslint:disable-next-line: no-submodule-imports
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
-import {
-  PaymentRounded,
-  MoveToInboxRounded,
-  ThumbsUpDownRounded,
-  RateReviewRounded,
-  EventNoteRounded,
-  ControlPointRounded
-} from '@material-ui/icons';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -62,7 +54,7 @@ export const Loadpages = key => {
   }
 };
 
-export default function LongMenu(props) {
+export default function LongMenu() {
   const classes = useStyles();
   const [value] = React.useState('home');
 
@@ -80,17 +72,12 @@ export default function LongMenu(props) {
       }}
     >
       <div className={classes.divTitleName}>
-        <span style={{ float: 'left' }}>我的银行卡</span>
-        <span style={{ float: 'right', fontSize: '0.65rem', color: '#00000075' }}>全部 ></span>
+        <span style={{ float: 'left' }}>收益信息</span>
+        <span style={{ float: 'right', fontSize: '0.65rem', color: '#00000075' }}>○</span>
       </div>
       <BottomNavigation showLabels className={classes.root} value={value} onChange={handleChange}>
-        <BottomNavigationAction label="已绑定/张" value="key1" icon={<span style={{ fontSize: '1.4rem' }}>{ props.bankcard ? props.bankcard.bind_totals : 0 }</span>} />
-        <BottomNavigationAction
-          style={{ color: '#fe4365', background: '#f0f0f0' }}
-          label="添加新的卡片"
-          value="key4"
-          icon={<ControlPointRounded style={{ height: '33px', fill: '#fe4365' }} />}
-        />
+        <BottomNavigationAction label="当月收益" value="key1" icon={<span style={{ fontSize: '1.4rem' }}>2710.00</span>} />
+        <BottomNavigationAction label="上月收益" value="key4" icon={<span style={{ fontSize: '1.4rem' }}>5823.00</span>} />
       </BottomNavigation>
     </div>
   );

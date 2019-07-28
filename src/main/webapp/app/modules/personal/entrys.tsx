@@ -14,7 +14,6 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       width: '100%',
-      maxWidth: '360px',
       paddingTop: '0px',
       backgroundColor: theme.palette.background.paper,
       '& span': {
@@ -27,22 +26,22 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function ListDividers(props) {
+export default function ListDividers() {
   const classes = useStyles();
 
   return (
     <List component="nav" className={classes.root} aria-label="Mailbox folders">
-      <ListItem button style={{ padding: '0px 16px 0px 16px', width: '100vw' }}>
-        <ListItemText primary="累计总收益" secondary={ props.entrys ? props.entrys.amount : 0 } />
+      <ListItem button style={{ padding: '0px 16px 0px 16px' }}>
+        <ListItemText primary="累计总收益" secondary="215881.00" />
         <span>></span>
       </ListItem>
       <Divider />
-      <ListItem button style={{ padding: '0px 16px 0px 16px', width: '100vw' }}>
+      <ListItem button>
         <ListItemText primary="提现账单记录" />
         <span>></span>
       </ListItem>
       <Divider />
-      <ListItem button style={{ padding: '0px 16px 0px 16px', width: '100vw' }}>
+      <ListItem button>
         <ListItemText primary="账户流水记录" />
         <span>></span>
       </ListItem>

@@ -5,7 +5,6 @@ import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 // tslint:disable-next-line: no-submodule-imports
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
-import { ControlPointRounded, MoveToInboxRounded, ThumbsUpDownRounded, RateReviewRounded, EventNoteRounded } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -54,21 +53,14 @@ export const Loadpages = key => {
   }
 };
 
-export default function LongMenu(props) {
+export default function LongMenu() {
   const classes = useStyles();
   const [value] = React.useState('home');
 
   function handleChange(event: React.ChangeEvent<{}>, newValue: string) {
     Loadpages(newValue);
   }
-  function formatNumberViewText(num: any) {
-    num = parseInt(num.replace(/\ |,/g , ''), 10);
-    const d = parseInt((num / 1000) , 10);
-    if (d >= 1) {
-      return (d + 'k' + ((num % 1000) ? '+' : ''));
-    }
-    return num;
-  }
+
   return (
     <div
       style={{
@@ -79,26 +71,16 @@ export default function LongMenu(props) {
       }}
     >
       <div className={classes.divTitleName}>
-        <span style={{ float: 'left' }}>推荐管理</span>
-        <span style={{ float: 'right', fontSize: '0.65rem', color: '#00000075' }}>全部 ></span>
+        <span style={{ float: 'left' }}>收益管理</span>
+        <span style={{ float: 'right', fontSize: '0.65rem', color: '#00000075' }}>○</span>
       </div>
       <BottomNavigation showLabels className={classes.root} value={value} onChange={handleChange}>
-        <BottomNavigationAction label="推荐中" value="key1" icon={<span style={{ fontSize: '1.4rem' }}>
-          { props.recommend.rc_ing ? formatNumberViewText(props.recommend.rc_ing) : 0 }
-        </span>} />
-        <BottomNavigationAction label="已推荐" value="key2" icon={<span style={{ fontSize: '1.4rem' }}>
-          { props.recommend.rc_ed ? formatNumberViewText(props.recommend.rc_ed) : 0 }
-        </span>} />
-        <BottomNavigationAction label="月流失" value="key3" icon={<span style={{ fontSize: '1.4rem' }}>
-          { props.recommend.loss ? formatNumberViewText(props.recommend.loss) : 0 }
-        </span>} />
-        <BottomNavigationAction
-          style={{ color: '#fe4365', background: '#f0f0f0' }}
-          label="推荐用户"
-          value="key4"
-          icon={<ControlPointRounded style={{ height: '33px', fill: '#fe4365' }} />}
-        />
+        <BottomNavigationAction label="冻结中" value="key1" icon={<span style={{ fontSize: '1.4rem' }}>300.00</span>} />
+        <BottomNavigationAction label="可提现" value="key2" icon={<span style={{ fontSize: '1.4rem' }}>732.81</span>} />
+        <BottomNavigationAction label="提现中" value="key3" icon={<span style={{ fontSize: '1.4rem' }}>650.30</span>} />
+        <BottomNavigationAction label="持有总额" value="key4" icon={<span style={{ fontSize: '1.4rem' }}>5821.00</span>} />
       </BottomNavigation>
+      <div style={{ height: '10px', width: '100%', backgroundColor: '#f0f0f0' }} />
     </div>
   );
 }

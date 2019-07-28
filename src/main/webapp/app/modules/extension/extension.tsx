@@ -33,6 +33,11 @@ export class Extension extends React.Component<IExtensionProp> {
 
   handleScroll = e => {
     console.log(e.srcElement.scrollingElement.scrollTop, e.srcElement.scrollingElement.scrollHeight);
+    console.log(
+      e.srcElement.scrollingElement.clientHeight + e.srcElement.scrollingElement.scrollTop === e.srcElement.scrollingElement.scrollHeight
+        ? '到底了'
+        : '没到底'
+    );
   };
 
   render() {

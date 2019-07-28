@@ -7,7 +7,7 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 // tslint:disable-next-line: no-submodule-imports
 import Avatar from '@material-ui/core/Avatar';
-import CloseRounded from '@material-ui/icons/CloseRounded';
+import SwapVertRounded from '@material-ui/icons/SwapVertRounded';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -96,7 +96,7 @@ export default function LongMenu(props) {
         <div className={classes.namePlusSetting}>
           <span className={classes.name}>
             {account.firstName}
-            <CloseRounded style={{ fill: '#fffde5', float: 'right' }} onClick={gotohomes} />
+            <SwapVertRounded style={{ fill: '#fffde5', float: 'right' }} onClick={gotohomes} />
           </span>
           <div className={classes.login}>{account.login}</div>
         </div>

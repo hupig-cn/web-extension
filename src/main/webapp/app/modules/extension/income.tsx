@@ -6,7 +6,6 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 // tslint:disable-next-line: no-submodule-imports
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 // tslint:disable-next-line: no-submodule-imports
-import Avatar from '@material-ui/core/Avatar';
 import CloseRounded from '@material-ui/icons/CloseRounded';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -74,7 +73,7 @@ const gotohomes = () => {
 
 export default function LongMenu(props) {
   const classes = useStyles();
-  const { account, state, userassets } = props;
+  const { profit } = props;
 
   return (
     <div>
@@ -106,7 +105,11 @@ export default function LongMenu(props) {
         showLabels
         className={classes.root}
       >
-        <BottomNavigationAction label={'今日推荐'} value="scan" icon={<span style={{ fontSize: '1.2rem', marginBottom: '5px' }}>0</span>} />
+        <BottomNavigationAction
+          label={'今日推荐'}
+          value="scan"
+          icon={<span style={{ fontSize: '1.2rem', marginBottom: '5px' }}>{profit.todayrecommend}</span>}
+        />
       </BottomNavigation>
       <BottomNavigation
         style={{
@@ -120,7 +123,11 @@ export default function LongMenu(props) {
         showLabels
         className={classes.root}
       >
-        <BottomNavigationAction label={'今日收益'} value="scan" icon={<span style={{ fontSize: '1.2rem', marginBottom: '5px' }}>0</span>} />
+        <BottomNavigationAction
+          label={'今日收益'}
+          value="scan"
+          icon={<span style={{ fontSize: '1.2rem', marginBottom: '5px' }}>{profit.todayprofit}</span>}
+        />
       </BottomNavigation>
       <div style={{ height: '140px' }} />
     </div>

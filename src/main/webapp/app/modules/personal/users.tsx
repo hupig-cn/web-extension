@@ -74,7 +74,7 @@ const gotohomes = () => {
 
 export default function LongMenu(props) {
   const classes = useStyles();
-  const { account, state, userassets } = props;
+  const { account, state, profit } = props;
 
   return (
     <div>
@@ -112,9 +112,9 @@ export default function LongMenu(props) {
         className={classes.root}
       >
         <BottomNavigationAction
-          label={'昨日收益：' + userassets.balance}
+          label={'昨日收益：' + profit.todaylastprofit}
           value="scan"
-          icon={<span style={{ fontSize: '1.4rem', marginBottom: '5px' }}>收益：{userassets.balance}</span>}
+          icon={<span style={{ fontSize: '1.4rem', marginBottom: '5px' }}>收益：{profit.totalprofit}</span>}
         />
       </BottomNavigation>
       <div style={{ height: '140px' }} />

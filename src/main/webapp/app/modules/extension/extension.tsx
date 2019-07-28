@@ -1,37 +1,55 @@
 import React from 'react';
 
 import { connect } from 'react-redux';
-import { getSession } from 'app/shared/reducers/authentication';
+import { getSession, getSessionRE } from 'app/shared/reducers/authentication';
 import Income from 'app/modules/extension/income';
 import Rrofiticon from 'app/modules/extension/profiticon';
-import Revenue from 'app/modules/extension/revenue';
 import Recommend from 'app/modules/extension/recommend';
+import Enddiv from 'app/shared/menu/enddiv';
+import { getProfitEntity } from 'app/requests/basic/profit.reducer';
+import { IRootState } from 'app/shared/reducers';
+import Error from 'app/modules/public/error';
+import Profit from 'app/modules/personal/profit';
 
-import Enddiv from '../../shared/menu/enddiv';
 export interface IExtensionProp extends StateProps, DispatchProps {}
 
 export class Extension extends React.Component<IExtensionProp> {
   componentDidMount() {
     this.props.getSession();
+    this.props
+      .getSessionRE()
+      // @ts-ignore
+      .then(valueI => {
+        valueI.payload.then(valueII => {
+          this.props.getProfitEntity(valueII.data.id);
+        });
+      });
   }
   render() {
+    const { account, profitEntity } = this.props;
     return (
       <div>
-        <Income />
-        <Rrofiticon />
-        {/*<Revenue />*/}
-        <Recommend />
-        <Enddiv />
+        {account && account.login ? (
+          <div>
+            <Income profit={profitEntity} />
+            <Rrofiticon />
+            <Recommend profit={profitEntity} />
+            <Enddiv />
+          </div>
+        ) : (
+          <Error />
+        )}
       </div>
     );
   }
 }
-const mapStateToProps = storeState => ({
-  account: storeState.authentication.account,
-  isAuthenticated: storeState.authentication.isAuthenticated
+const mapStateToProps = ({ authentication, profit }: IRootState) => ({
+  account: authentication.account,
+  isAuthenticated: authentication.isAuthenticated,
+  profitEntity: profit.entity
 });
 
-const mapDispatchToProps = { getSession };
+const mapDispatchToProps = { getSession, getProfitEntity, getSessionRE };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

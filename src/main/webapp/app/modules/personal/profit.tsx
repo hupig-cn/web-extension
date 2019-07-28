@@ -54,9 +54,10 @@ export const Loadpages = key => {
   }
 };
 
-export default function LongMenu() {
+export default function LongMenu(props) {
   const classes = useStyles();
   const [value] = React.useState('home');
+  const { profit } = props;
 
   function handleChange(event: React.ChangeEvent<{}>, newValue: string) {
     Loadpages(newValue);
@@ -76,8 +77,8 @@ export default function LongMenu() {
         <span style={{ float: 'right', fontSize: '0.65rem', color: '#00000075' }}>○</span>
       </div>
       <BottomNavigation showLabels className={classes.root} value={value} onChange={handleChange}>
-        <BottomNavigationAction label="当月收益" value="key1" icon={<span style={{ fontSize: '1.4rem' }}>2710.00</span>} />
-        <BottomNavigationAction label="上月收益" value="key4" icon={<span style={{ fontSize: '1.4rem' }}>5823.00</span>} />
+        <BottomNavigationAction label="当月收益" value="key1" icon={<span style={{ fontSize: '1.4rem' }}>{profit.monthprofit}</span>} />
+        <BottomNavigationAction label="上月收益" value="key4" icon={<span style={{ fontSize: '1.4rem' }}>{profit.monthlastprofit}</span>} />
       </BottomNavigation>
     </div>
   );

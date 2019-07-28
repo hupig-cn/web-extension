@@ -8,9 +8,10 @@ import Recommend from './recommend';
 import Advertising from './advertising';
 import Error from 'app/modules/public/error';
 import { getMyImg } from 'app/requests/basic/files.reducer';
-import { queryBalance } from 'app/requests/basic/userassets.reducer';
 import Profit from './profit';
 import Entrys from './entrys';
+import { getProfitEntity } from 'app/requests/basic/profit.reducer';
+import Enddiv from 'app/shared/menu/enddiv';
 
 export interface IPersonalProp extends StateProps, DispatchProps {}
 
@@ -23,7 +24,7 @@ export class Personal extends React.Component<IPersonalProp> {
       // @ts-ignore
       .then(valueI => {
         valueI.payload.then(valueII => {
-          this.props.queryBalance(valueII.data.id);
+          this.props.getProfitEntity(valueII.data.id);
           if (valueII.data.imageUrl > 0) {
             this.props
               .getMyImg(valueII.data.imageUrl)
@@ -40,16 +41,17 @@ export class Personal extends React.Component<IPersonalProp> {
   }
 
   render() {
-    const { account, userassetsEntity } = this.props;
+    const { account, profitEntity } = this.props;
     return (
       <div>
-        {!(account && account.login) ? (
+        {account && account.login ? (
           <div className="jh-personal">
-            <Users account={account} state={this.state} userassets={userassetsEntity} />
-            <Recommend />
+            <Users account={account} state={this.state} profit={profitEntity} />
+            <Recommend profit={profitEntity} />
             <Advertising />
-            <Profit />
-            <Entrys />
+            <Profit profit={profitEntity} />
+            <Entrys profit={profitEntity} />
+            <Enddiv />
           </div>
         ) : (
           <Error />
@@ -59,14 +61,14 @@ export class Personal extends React.Component<IPersonalProp> {
   }
 }
 
-const mapStateToProps = ({ authentication, files, userassets }: IRootState) => ({
+const mapStateToProps = ({ authentication, files, profit }: IRootState) => ({
   account: authentication.account,
   isAuthenticated: authentication.isAuthenticated,
   filesEntity: files.entity,
-  userassetsEntity: userassets.entity
+  profitEntity: profit.entity
 });
 
-const mapDispatchToProps = { getSession, getMyImg, getSessionRE, queryBalance };
+const mapDispatchToProps = { getSession, getMyImg, getSessionRE, getProfitEntity };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

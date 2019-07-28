@@ -7,6 +7,7 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 // tslint:disable-next-line: no-submodule-imports
 import Avatar from '@material-ui/core/Avatar';
+// tslint:disable-next-line: no-submodule-imports
 import SwapVertRounded from '@material-ui/icons/SwapVertRounded';
 
 const useStyles = makeStyles((theme: Theme) =>

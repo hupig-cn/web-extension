@@ -9,7 +9,7 @@ import Enddiv from 'app/shared/menu/enddiv';
 import { getProfitEntity } from 'app/requests/basic/profit.reducer';
 import { IRootState } from 'app/shared/reducers';
 import Error from 'app/modules/public/error';
-import Profit from 'app/modules/personal/profit';
+import Recommendlist from './recommendlist';
 
 export interface IExtensionProp extends StateProps, DispatchProps {}
 
@@ -24,16 +24,27 @@ export class Extension extends React.Component<IExtensionProp> {
           this.props.getProfitEntity(valueII.data.id);
         });
       });
+    window.addEventListener('scroll', this.handleScroll.bind(this)); //监听滚动
   }
+  componentWillUnmount() {
+    //一定要最后移除监听器，以防多个组件之间导致this的指向紊乱
+    window.removeEventListener('scroll', this.handleScroll.bind(this));
+  }
+
+  handleScroll = e => {
+    console.log(e.srcElement.scrollingElement.scrollTop, e.srcElement.scrollingElement.scrollHeight);
+  };
+
   render() {
     const { account, profitEntity } = this.props;
     return (
       <div>
-        {account && account.login ? (
+        {!(account && account.login) ? (
           <div>
             <Income profit={profitEntity} />
             <Rrofiticon />
             <Recommend profit={profitEntity} />
+            <Recommendlist />
             <Enddiv />
           </div>
         ) : (

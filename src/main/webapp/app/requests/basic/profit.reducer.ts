@@ -98,7 +98,7 @@ export default (state: ProfitState = initialState, action): ProfitState => {
   }
 };
 
-const apiUrl = 'basic/api/receiptpay/getUserPrifitInfo';
+const apiUrl = 'services/basic/api/receiptpay/getUserPrifitInfo';
 
 // Actions
 

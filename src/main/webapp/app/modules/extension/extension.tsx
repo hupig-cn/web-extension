@@ -24,14 +24,17 @@ export class Extension extends React.Component<IExtensionProp> {
           this.props.getProfitEntity(valueII.data.id);
         });
       });
-    window.addEventListener('scroll', this.handleScroll.bind(this)); //监听滚动
+    // tslint:disable-next-line: unnecessary-bind
+    window.addEventListener('scroll', this.handleScroll.bind(this)); // 监听滚动
   }
   componentWillUnmount() {
-    //一定要最后移除监听器，以防多个组件之间导致this的指向紊乱
+    // 一定要最后移除监听器，以防多个组件之间导致this的指向紊乱
+    // tslint:disable-next-line: unnecessary-bind
     window.removeEventListener('scroll', this.handleScroll.bind(this));
   }
 
   handleScroll = e => {
+    // tslint:disable-next-line: no-console
     console.log(e.srcElement.scrollingElement.scrollTop, e.srcElement.scrollingElement.scrollHeight);
   };
 

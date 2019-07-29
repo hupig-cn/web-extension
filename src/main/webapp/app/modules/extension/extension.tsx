@@ -36,6 +36,7 @@ export class Extension extends React.Component<IExtensionProp> {
   handleScroll = e => {
     // tslint:disable-next-line: no-console
     console.log(e.srcElement.scrollingElement.scrollTop, e.srcElement.scrollingElement.scrollHeight);
+    // tslint:disable-next-line: no-console
     console.log(
       e.srcElement.scrollingElement.clientHeight + e.srcElement.scrollingElement.scrollTop === e.srcElement.scrollingElement.scrollHeight
         ? '到底了'

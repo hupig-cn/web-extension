@@ -28,9 +28,9 @@ export class Extension extends React.Component<IExtensionProp> {
             // @ts-ignore
             .then(val => {
               val.value.data.data.map(key => {
-                let recommenduser = this.state.recommenduser;
+                const recommenduser = this.state.recommenduser;
                 recommenduser.push({ phoneOrToken: key.phoneOrToken, time: key.time });
-                this.setState({ recommenduser: recommenduser, startPage: 1 });
+                this.setState({ recommenduser, startPage: 1 });
               });
             });
         });
@@ -56,9 +56,9 @@ export class Extension extends React.Component<IExtensionProp> {
         .then(val => {
           if (val.value.data.data !== undefined && undefined !== val.value.data.data.map) {
             val.value.data.data.map(key => {
-              let recommenduser = this.state.recommenduser;
+              const recommenduser = this.state.recommenduser;
               recommenduser.push({ phoneOrToken: key.phoneOrToken, time: key.time });
-              this.setState({ recommenduser: recommenduser, startPage: this.state.startPage + 1 });
+              this.setState({ recommenduser, startPage: this.state.startPage + 1 });
             });
           }
         });

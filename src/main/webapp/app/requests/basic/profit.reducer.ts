@@ -109,3 +109,14 @@ export const getProfitEntity: ICrudGetAction<IProfit> = userid => {
     payload: axios.get<IProfit>(requestUrl)
   };
 };
+
+export const findAllByRecommendAndInfo = (userid: string, startPage: number, pageSize: number) => {
+  const requestUrl = `services/basic/api/findAllByRecommendAndInfo/?userid=${userid}&startPage=${startPage}&pageSize=${pageSize}`;
+  return {
+    payload: axios.get(requestUrl)
+  };
+};
+
+export const reset = () => ({
+  type: ACTION_TYPES.RESET
+});

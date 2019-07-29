@@ -6,7 +6,7 @@ import Income from 'app/modules/extension/income';
 import Rrofiticon from 'app/modules/extension/profiticon';
 import Recommend from 'app/modules/extension/recommend';
 import Enddiv from 'app/shared/menu/enddiv';
-import { getProfitEntity } from 'app/requests/basic/profit.reducer';
+import { getProfitEntity, findAllByRecommendAndInfo } from 'app/requests/basic/profit.reducer';
 import { IRootState } from 'app/shared/reducers';
 import Error from 'app/modules/public/error';
 import Recommendlist from './recommendlist';
@@ -14,6 +14,7 @@ import Recommendlist from './recommendlist';
 export interface IExtensionProp extends StateProps, DispatchProps {}
 
 export class Extension extends React.Component<IExtensionProp> {
+  state = { recommenduser: [{}], startPage: 0, pageSize: 10 };
   componentDidMount() {
     this.props.getSession();
     this.props
@@ -22,6 +23,16 @@ export class Extension extends React.Component<IExtensionProp> {
       .then(valueI => {
         valueI.payload.then(valueII => {
           this.props.getProfitEntity(valueII.data.id);
+          this.props
+            .findAllByRecommendAndInfo(valueII.data.id, this.state.startPage, this.state.pageSize)
+            // @ts-ignore
+            .then(val => {
+              val.value.data.data.map(key => {
+                let recommenduser = this.state.recommenduser;
+                recommenduser.push({ phoneOrToken: key.phoneOrToken, time: key.time });
+                this.setState({ recommenduser: recommenduser, startPage: 1 });
+              });
+            });
         });
       });
     // tslint:disable-next-line: unnecessary-bind
@@ -35,12 +46,23 @@ export class Extension extends React.Component<IExtensionProp> {
 
   handleScroll = e => {
     // tslint:disable-next-line: no-console
-    console.log(e.srcElement.scrollingElement.scrollTop, e.srcElement.scrollingElement.scrollHeight);
-    console.log(
-      e.srcElement.scrollingElement.clientHeight + e.srcElement.scrollingElement.scrollTop === e.srcElement.scrollingElement.scrollHeight
-        ? '到底了'
-        : '没到底'
-    );
+    if (
+      e.srcElement.scrollingElement.clientHeight + e.srcElement.scrollingElement.scrollTop ===
+      e.srcElement.scrollingElement.scrollHeight
+    ) {
+      this.props
+        .findAllByRecommendAndInfo(this.props.account.id, this.state.startPage, this.state.pageSize)
+        // @ts-ignore
+        .then(val => {
+          if (val.value.data.data !== undefined && undefined !== val.value.data.data.map) {
+            val.value.data.data.map(key => {
+              let recommenduser = this.state.recommenduser;
+              recommenduser.push({ phoneOrToken: key.phoneOrToken, time: key.time });
+              this.setState({ recommenduser: recommenduser, startPage: this.state.startPage + 1 });
+            });
+          }
+        });
+    }
   };
 
   render() {
@@ -52,7 +74,7 @@ export class Extension extends React.Component<IExtensionProp> {
             <Income profit={profitEntity} />
             <Rrofiticon />
             <Recommend profit={profitEntity} />
-            <Recommendlist />
+            <Recommendlist state={this.state} />
             <Enddiv />
           </div>
         ) : (
@@ -68,7 +90,7 @@ const mapStateToProps = ({ authentication, profit }: IRootState) => ({
   profitEntity: profit.entity
 });
 
-const mapDispatchToProps = { getSession, getProfitEntity, getSessionRE };
+const mapDispatchToProps = { getSession, getProfitEntity, getSessionRE, findAllByRecommendAndInfo };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

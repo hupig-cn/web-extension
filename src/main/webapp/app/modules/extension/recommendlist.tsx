@@ -108,23 +108,24 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function BottomAppBar() {
+export default function BottomAppBar(props) {
   const classes = useStyles();
+  const { state } = props;
 
   return (
     <React.Fragment>
       <CssBaseline />
       <Paper square className={classes.paper}>
         <List className={classes.list}>
-          {messages.map(({ id, title, time }) => (
-            <React.Fragment key={id}>
+          {state.recommenduser.map(val => (
+            <React.Fragment>
               <ListItem button style={{ borderBottom: '1px solid #f0f0f0', position: 'relative' }}>
                 <ListItemText
                   style={{
                     margin: '0 auto',
                     height: '100%'
                   }}
-                  primary={title}
+                  primary={val.phoneOrToken}
                   secondary={
                     <React.Fragment>
                       <Typography component="span" variant="body2" className={classes.inline} color="textPrimary" />
@@ -141,7 +142,7 @@ export default function BottomAppBar() {
                     color: '#00000095'
                   }}
                 >
-                  {time}
+                  {val.time}
                 </span>
               </ListItem>
             </React.Fragment>

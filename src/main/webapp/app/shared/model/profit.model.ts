@@ -9,4 +9,12 @@ export interface IProfit {
   totalrecommend?: string;
 }
 
-export const defaultValue: Readonly<IProfit> = {};
+export const defaultValue: Readonly<IProfit> = {
+  todayrecommend: '0',
+  todayprofit: '0',
+  todaylastprofit: '0',
+  monthprofit: '0',
+  monthlastprofit: '0',
+  totalprofit: '0',
+  totalrecommend: '0'
+};

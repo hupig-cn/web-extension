@@ -30,7 +30,7 @@ export class Extension extends React.Component<IExtensionProp> {
               val.value.data.data.map(key => {
                 const recommenduser = this.state.recommenduser;
                 recommenduser.push({ phoneOrToken: key.phoneOrToken, time: key.time });
-                this.setState({ recommenduser: recommenduser, startPage: 1 });
+                this.setState({ recommenduser, startPage: 1 });
               });
             });
         });
@@ -59,7 +59,7 @@ export class Extension extends React.Component<IExtensionProp> {
             val.value.data.data.map(key => {
               const recommenduser = this.state.recommenduser;
               recommenduser.push({ phoneOrToken: key.phoneOrToken, time: key.time });
-              this.setState({ recommenduser: recommenduser, startPage: startPage });
+              this.setState({ recommenduser, startPage });
             });
           }
         });

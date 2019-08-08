@@ -18,7 +18,7 @@ import { AUTHORITIES } from 'app/config/constants';
 import AppRoutes from 'app/routes';
 import BottomNavigation from 'app/shared/menu/bottomnavigation';
 import Enddiv from 'app/shared/menu/enddiv';
-
+import SampleComponent from 'app/modules/extension/SampleComponent';
 const baseHref = document
   .querySelector('base')
   .getAttribute('href')
@@ -33,6 +33,7 @@ export class App extends React.Component<IAppProps> {
   }
 
   render() {
+    const { account } = this.props;
     return (
       <Router basename={baseHref}>
         <div className="app-container">
@@ -48,6 +49,11 @@ export class App extends React.Component<IAppProps> {
           <ErrorBoundary>
             <BottomNavigation />
           </ErrorBoundary>
+          <
+            // @ts-ignore
+            SampleComponent
+            userid={account.id}
+          />
         </div>
       </Router>
     );
@@ -60,7 +66,8 @@ const mapStateToProps = ({ authentication, applicationProfile, locale }: IRootSt
   isAdmin: hasAnyAuthority(authentication.account.authorities, [AUTHORITIES.ADMIN]),
   ribbonEnv: applicationProfile.ribbonEnv,
   isInProduction: applicationProfile.inProduction,
-  isSwaggerEnabled: applicationProfile.isSwaggerEnabled
+  isSwaggerEnabled: applicationProfile.isSwaggerEnabled,
+  account: authentication.account
 });
 
 const mapDispatchToProps = { setLocale, getSession, getProfile };

@@ -39,10 +39,7 @@ public class SecurityConfiguration extends ResourceServerConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http
             .csrf()
-            .ignoringAntMatchers("/h2-console/**")
-            .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-        .and()
-            .addFilterBefore(corsFilter, CsrfFilter.class)
+            .disable()
             .headers()
             .frameOptions()
             .disable()

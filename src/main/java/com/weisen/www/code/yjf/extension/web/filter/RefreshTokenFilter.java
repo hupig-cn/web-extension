@@ -53,6 +53,12 @@ public class RefreshTokenFilter extends GenericFilterBean {
         throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
         HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
+        httpServletResponse.setHeader("Access-Control-Allow-Origin", "*"); //解决跨域访问报错   
+        httpServletResponse.setHeader("Access-Control-Allow-Methods", "POST, PUT, GET, OPTIONS, DELETE");   
+        httpServletResponse.setHeader("Access-Control-Max-Age", "3600"); //设置过期时间   
+        httpServletResponse.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, client_id, uuid, Authorization");   
+        httpServletResponse.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // 支持HTTP 1.1.   
+        httpServletResponse.setHeader("Pragma", "no-cache"); // 支持HTTP 1.0. response.setHeader("Expires", "0"); 
         try {
             httpServletRequest = refreshTokensIfExpiring(httpServletRequest, httpServletResponse);
         } catch (ClientAuthenticationException ex) {
